@@ -1,0 +1,4 @@
+<ion-badge [style.--background]="categoria | categoryColor" color="light">
+  <ion-icon *ngIf="mostrarIcono" [name]="categoria | categoryIcon" slot="start"></ion-icon>
+  {{ categoria }}
+</ion-badge>

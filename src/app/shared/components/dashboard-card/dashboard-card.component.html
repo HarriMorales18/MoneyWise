@@ -1,0 +1,14 @@
+<ion-card class="dashboard-metric-card" [ngClass]="'dashboard-metric-card--' + tipo">
+  <ion-card-header>
+    <div class="dashboard-metric-card__eyebrow">Resumen</div>
+    <div class="dashboard-metric-card__header-row">
+      <ion-card-title>{{ titulo }}</ion-card-title>
+      <div class="dashboard-metric-card__icon">
+        <ion-icon [name]="icono"></ion-icon>
+      </div>
+    </div>
+  </ion-card-header>
+  <ion-card-content>
+    <h2>{{ monto | currencyFormat }}</h2>
+  </ion-card-content>
+</ion-card>

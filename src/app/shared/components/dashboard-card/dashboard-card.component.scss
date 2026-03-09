@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.dashboard-metric-card {
+  height: 100%;
+  margin: 10px 0;
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.96) 100%);
+}
+
+.dashboard-metric-card__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.dashboard-metric-card__header-row {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dashboard-metric-card__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+}
+
+ion-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  line-height: 1.05;
+  color: #0f172a;
+}
+
+.dashboard-metric-card--saldo .dashboard-metric-card__eyebrow,
+.dashboard-metric-card--saldo ion-card-title,
+.dashboard-metric-card--saldo .dashboard-metric-card__icon {
+  color: #1d4ed8;
+}
+
+.dashboard-metric-card--saldo .dashboard-metric-card__icon {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.dashboard-metric-card--ingreso .dashboard-metric-card__eyebrow,
+.dashboard-metric-card--ingreso ion-card-title,
+.dashboard-metric-card--ingreso .dashboard-metric-card__icon {
+  color: #047857;
+}
+
+.dashboard-metric-card--ingreso .dashboard-metric-card__icon {
+  background: rgba(4, 120, 87, 0.12);
+}
+
+.dashboard-metric-card--gasto .dashboard-metric-card__eyebrow,
+.dashboard-metric-card--gasto ion-card-title,
+.dashboard-metric-card--gasto .dashboard-metric-card__icon {
+  color: #b91c1c;
+}
+
+.dashboard-metric-card--gasto .dashboard-metric-card__icon {
+  background: rgba(185, 28, 28, 0.12);
+}

@@ -1,0 +1,38 @@
+
+:host {
+	display: block;
+}
+
+
+.modal-toolbar {
+	--background: var(--ion-color-primary);
+	--box-shadow: none;
+	--min-height: 56px;
+	padding-inline: 6px;
+	color: var(--ion-color-primary-contrast);
+}
+
+.modal-toolbar ion-button {
+	--padding-start: 6px;
+	--padding-end: 6px;
+	color: var(--ion-color-primary-contrast);
+}
+
+.modal-title {
+	text-align: center;
+	font-weight: 700;
+	font-size: 1.05rem;
+	color: var(--ion-color-primary-contrast);
+}
+
+ion-header + ion-content {
+	padding-top: 6px;
+}
+
+/* subtle divider under toolbar when rendered on large screens */
+@media (min-width: 0px) {
+	.modal-toolbar {
+		border-bottom: 1px solid rgba(15,23,42,0.04);
+	}
+}
+

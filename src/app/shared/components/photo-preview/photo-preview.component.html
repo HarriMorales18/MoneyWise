@@ -1,0 +1,7 @@
+<ion-thumbnail *ngIf="size !== 'large'" (click)="onClick.emit()">
+  <ion-img [src]="src"></ion-img>
+</ion-thumbnail>
+
+<div *ngIf="size === 'large'" class="photo-large" (click)="onClick.emit()">
+  <ion-img [src]="src"></ion-img>
+</div>

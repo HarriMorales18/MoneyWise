@@ -1,0 +1,345 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-card {
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.06);
+  overflow: hidden;
+  /* add extra bottom padding so footer buttons sit above system nav bars */
+  padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 64px);
+}
+
+.transaction-card ion-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-row {
+  padding: 12px 16px 18px 16px;
+  background: transparent;
+  margin-top: 12px; /* keep footer visually close to card content */
+  position: relative;
+  z-index: 6; /* stay above overlays */
+  /* nudge upward so native nav buttons don't overlap; uses safe-area when available */
+  transform: translateY(calc(-1 * (env(safe-area-inset-bottom, 16px) + 8px)));
+}
+
+@media (max-width: 420px) {
+  .action-row {
+    transform: translateY(calc(-1 * (env(safe-area-inset-bottom, 20px) + 12px)));
+  }
+}
+
+.tipo-segment {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  padding: 8px 0 6px 0;
+  margin: 4px 0 2px 0;
+}
+
+.tipo-segment ::ng-deep ion-segment-button {
+  border-radius: 999px;
+  padding: 6px 12px;
+  min-width: 96px;
+  --background: transparent;
+  --color: rgba(0,0,0,0.72);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.12s ease;
+}
+
+.tipo-segment ::ng-deep ion-segment-button.ion-activated,
+.tipo-segment ::ng-deep ion-segment-button[aria-pressed="true"] {
+  --background: var(--ion-color-step-100, rgba(0,123,255,0.08));
+  --color: var(--ion-color-primary, #2b7cff);
+  box-shadow: none;
+  border-color: rgba(43,124,255,0.12);
+}
+
+.tipo-segment ::ng-deep ion-segment-button:focus {
+  outline: 2px solid rgba(43,124,255,0.14);
+  outline-offset: 2px;
+}
+
+.descripcion-item ion-textarea {
+  min-height: 28px;
+}
+
+
+.descripcion-item {
+  background: transparent;
+  padding: 6px 0 0 0;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.descripcion-label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: rgba(0,0,0,0.78);
+  margin: 0 0 6px 0;
+}
+
+.descripcion-textarea {
+  --background: rgba(255,255,255,0.98);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+  resize: vertical;
+  min-height: 44px;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  background-clip: padding-box;
+  background-color: #ffffff !important; /* ensure it covers any lines underneath */
+  z-index: 2;
+}
+
+@media (max-width: 420px) {
+  .descripcion-textarea {
+    min-height: 36px;
+  }
+}
+
+/* Style the native textarea inside ion-textarea so it can grow and wrap lines */
+.descripcion-textarea ::ng-deep textarea {
+  padding: 4px 0 2px 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  min-height: 36px !important;
+  line-height: 20px !important;
+  font-size: 14px !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow: auto !important;
+}
+
+/* keep Ionic internal bottom elements hidden to avoid duplicate lines */
+.descripcion-textarea ::ng-deep .textarea-bottom,
+.descripcion-textarea ::ng-deep .textarea-bottom::before,
+.descripcion-textarea ::ng-deep .textarea-bottom::after {
+  display: none !important;
+}
+
+/* focus state */
+.descripcion-textarea:focus-within {
+  /* keep a very subtle focus but prevent the default dark/black line */
+  border-color: rgba(0,0,0,0.06) !important;
+  box-shadow: 0 6px 18px rgba(43,124,255,0.03) !important;
+}
+
+/* Remove any native focus underline/outline coming from the textarea or platform */
+.descripcion-textarea ::ng-deep textarea:focus,
+.descripcion-textarea ::ng-deep textarea:active,
+.descripcion-textarea ::ng-deep textarea:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Ensure Ionic internal bottom elements are hidden (extra safety) */
+.descripcion-textarea ::ng-deep .textarea-bottom,
+.descripcion-textarea ::ng-deep .textarea-bottom::before,
+.descripcion-textarea ::ng-deep .textarea-bottom::after {
+  display: none !important;
+}
+
+/* Defensive: remove any top/bottom borders on adjacent elements that might show as a stray line */
+.descripcion-item + * {
+  border-top: none !important;
+}
+
+/* Hide any thin separators inside the card near description */
+.transaction-card ion-card-content hr,
+.transaction-card ion-card-content .separator,
+.transaction-card ion-card-content .line {
+  display: none !important;
+}
+
+/* placeholder style */
+.descripcion-textarea ::ng-deep textarea::placeholder {
+  color: rgba(0,0,0,0.38) !important;
+}
+
+/* make inputs visually consistent inside the card */
+.transaction-card app-select-field ::ng-deep ion-select,
+.transaction-card app-date-field ::ng-deep ion-datetime,
+.transaction-card app-input-field ::ng-deep ion-input {
+  --background: rgba(255,255,255,0.98);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+}
+
+/* Date field styling: compact, clean and consistent with other inputs */
+.transaction-card app-date-field {
+  display: block;
+  width: 100%;
+}
+
+.transaction-card app-date-field ion-item {
+  --background: transparent;
+  border: none;
+  padding: 6px 0 6px 0;
+  margin-bottom: 6px;
+}
+
+.transaction-card app-date-field ion-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.78);
+  margin-bottom: 6px;
+}
+
+.transaction-card app-date-field ::ng-deep ion-datetime {
+  --background: transparent;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: none;
+  min-height: 40px;
+  font-size: 14px;
+}
+
+/* remove visible tap/click feedback on datetime control */
+.transaction-card app-date-field ::ng-deep ion-datetime,
+.transaction-card app-date-field ::ng-deep ion-datetime .datetime-text {
+  background: transparent !important;
+  -webkit-tap-highlight-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* subtle focus for keyboard users */
+.transaction-card app-date-field ::ng-deep ion-datetime:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(43,124,255,0.06) !important;
+}
+
+/* Style select (Categoría) to match the professional form look */
+.transaction-card app-select-field {
+  display: block;
+  width: 100%;
+}
+
+.transaction-card app-select-field ion-item {
+  --background: transparent;
+  border: none;
+  padding: 6px 0 6px 0;
+  margin-bottom: 6px;
+}
+
+.transaction-card app-select-field ion-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.78);
+  margin-bottom: 6px;
+}
+
+.transaction-card app-select-field ::ng-deep ion-select {
+  --background: transparent;
+  --placeholder-color: rgba(0,0,0,0.38);
+  border-radius: 8px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: none;
+  min-height: 36px;
+  font-size: 14px;
+}
+
+.transaction-card app-select-field ::ng-deep ion-select[aria-expanded="true"] {
+  border-color: rgba(43,124,255,0.12);
+}
+
+.transaction-card app-select-field ::ng-deep .select-text {
+  color: rgba(0,0,0,0.88) !important;
+}
+
+/* Extra overrides: remove any visible active/tap feedback for category select */
+.transaction-card app-select-field,
+.transaction-card app-select-field ion-item,
+.transaction-card app-select-field ion-select,
+.transaction-card app-select-field ::ng-deep ion-select,
+.transaction-card app-select-field ::ng-deep ion-select::part(native),
+.transaction-card app-select-field ::ng-deep ion-select::part(text),
+.transaction-card app-select-field ::ng-deep ion-select .select-button,
+.transaction-card app-select-field ::ng-deep ion-select .select-text,
+.transaction-card app-select-field ::ng-deep ion-select .select-icon {
+  background: transparent !important;
+  -webkit-tap-highlight-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-user-select: none !important;
+}
+
+.transaction-card app-select-field ::ng-deep ion-select,
+.transaction-card app-select-field ::ng-deep ion-select .select-button {
+  --ripple-color: transparent !important;
+  --activated-opacity: 0 !important;
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+}
+
+/* remove Ionic activated classes visuals */
+.transaction-card app-select-field ::ng-deep .ion-activated,
+.transaction-card app-select-field ::ng-deep .activated,
+.transaction-card app-select-field ::ng-deep .select-button.activated,
+.transaction-card app-select-field ::ng-deep .sc-ion-item-md-h.ion-activated {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ensure keyboard focus still visible but subtle */
+.transaction-card app-select-field ::ng-deep ion-select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(43,124,255,0.06) !important;
+}
+
+/* make tap/click visually invisible: remove active/bg/ripple but keep functionality */
+.transaction-card app-select-field ::ng-deep ion-select::part(native),
+.transaction-card app-select-field ::ng-deep ion-select::part(text),
+.transaction-card app-select-field ::ng-deep ion-select {
+  --ripple-color: transparent !important;
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* reduce visual feedback on focus but keep subtle outline for keyboard users */
+.transaction-card app-select-field ::ng-deep ion-select:focus {
+  box-shadow: none !important;
+}
+
+/* Additional overrides to remove dark/active background on tap for ion-item and ion-select */
+.transaction-card app-select-field ion-item,
+.transaction-card app-select-field ion-item:active,
+.transaction-card app-select-field ion-item.ion-activated,
+.transaction-card app-select-field ::ng-deep ion-select .select-button,
+.transaction-card app-select-field ::ng-deep ion-select .select-text,
+.transaction-card app-select-field ::ng-deep ion-select .select-icon {
+  background: transparent !important;
+  -webkit-tap-highlight-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.transaction-card app-select-field ion-item.ion-activated,
+.transaction-card app-select-field ion-item:active {
+  --background: transparent !important;
+}
+
+/* Remove any activated overlay coming from Ionic internals */
+.transaction-card app-select-field ::ng-deep .sc-ion-select-md-h .select-button.activated,
+.transaction-card app-select-field ::ng-deep .sc-ion-item-md-h.ion-activated {
+  background: transparent !important;
+  box-shadow: none !important;
+}

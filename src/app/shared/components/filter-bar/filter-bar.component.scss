@@ -1,0 +1,180 @@
+:host {
+  display: block;
+}
+
+/* Base spacing for each control */
+ion-segment,
+app-select-field,
+ion-searchbar {
+  margin-bottom: 12px;
+  display: block;
+  width: 100%;
+}
+
+/* Preserve existing visual style for the segment buttons */
+ion-segment {
+  --background: rgba(255,255,255,0.98);
+  padding: 8px;
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+ion-segment-button {
+  --border-radius: 14px;
+  min-height: 44px;
+  font-weight: 700;
+  padding: 8px 14px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make taps on the segment and its buttons visually invisible */
+ion-segment,
+ion-segment-button {
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+  --ripple-color: transparent !important;
+  --activated-opacity: 0 !important;
+}
+
+/* extra defensive rule for segment button inner element */
+ion-segment-button::part(native) {
+  background: transparent !important;
+}
+
+
+/* Make the searchbar visually match the segment (full-width, subtle background, no strong container) */
+ion-searchbar {
+  --background: rgba(255,255,255,0.98);
+  --border-radius: 20px;
+  --box-shadow: none;
+  --placeholder-color: #7c879a;
+  padding: 2px 6px;
+  height: 44px;
+  border: 0; /* remove container border but keep background/shadow */
+  box-shadow: 0 8px 24px rgba(15,23,42,0.03);
+}
+
+/* Ensure custom select aligns visually and expands fully */
+app-select-field {
+  display: block;
+  width: 100%;
+}
+
+/* Target inner ion-select if present inside app-select-field to match styles */
+app-select-field ::ng-deep ion-select {
+  --background: rgba(255,255,255,0.98);
+  --border-radius: 20px;
+  --placeholder-color: #7c879a;
+  padding: 8px 12px;
+  border: 0; /* remove visible border so select looks like the searchbar */
+  box-shadow: 0 8px 24px rgba(15,23,42,0.03);
+}
+
+/* New layout: label left, select right, no visible container */
+.categoria-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.categoria-label {
+  display: inline-block;
+  float: left;
+  color: #6b4a22;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+
+.categoria-field {
+  display: inline-block;
+  float: none;
+  width: auto; /* size to content */
+  min-width: 160px;
+  max-width: 320px;
+  margin-left: auto; /* push to the right if space available */
+}
+
+/* ensure the select's ion-item chrome is invisible */
+.categoria-field ::ng-deep ion-item {
+  --background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Make the internal ion-item only as wide as the select, so clicks are limited */
+.categoria-field ::ng-deep ion-item {
+  display: inline-flex !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.categoria-field {
+  align-self: center;
+}
+
+/* Remove internal ion-item visual chrome inside select field */
+.categoria-field ::ng-deep ion-label {
+  display: none; /* hide internal label so our left label is used */
+}
+
+.categoria-field ::ng-deep ion-select {
+  width: 100%;
+  --background: rgba(255,255,255,0.98);
+  --border-radius: 20px;
+  border: 0;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.03);
+}
+
+/* Make taps invisible: remove activated/focus/ripple styles on the inner item/select */
+.categoria-field ::ng-deep ion-item {
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+  --ripple-color: transparent !important;
+  --activated-opacity: 0 !important;
+}
+
+.categoria-field ::ng-deep ion-select {
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+  --ripple-color: transparent !important;
+}
+
+/* clear floats for following elements */
+:host ::ng-deep .categoria-field + *, :host ::ng-deep .categoria-label + * {
+  clear: both;
+}
+
+@media (max-width: 700px) {
+  .categoria-label,
+  .categoria-field {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  .categoria-label { margin-bottom: 6px; }
+}
+
+@media (max-width: 768px) {
+  ion-segment {
+    gap: 8px;
+    padding: 6px;
+  }
+
+  ion-searchbar {
+    height: 42px;
+  }
+}

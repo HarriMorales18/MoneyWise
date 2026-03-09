@@ -1,0 +1,44 @@
+<div class="ion-padding transacciones-page">
+  <div class="page-title-row">
+    <h2>Transacciones</h2>
+  </div>
+
+  <app-filter-bar
+    [tipoSeleccionado]="tipoSeleccionado"
+    [categoriaSeleccionada]="categoriaSeleccionada"
+    [textoBusqueda]="textoBusqueda"
+    (onTipoChange)="onTipoChange($event)"
+    (onCategoriaChange)="onCategoriaChange($event)"
+    (onBuscarChange)="onBuscarChange($event)">
+  </app-filter-bar>
+
+  <ion-list class="transacciones-list" *ngIf="transaccionesFiltradas.length; else empty">
+    <ion-item-sliding *ngFor="let t of transaccionesFiltradas" #slidingItem>
+      <app-transaction-item
+        [transaccion]="t"
+        (onClick)="irDetalle(t)"
+        (onPhotoClick)="abrirPreviewFoto(t)">
+      </app-transaction-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="medium" (click)="abrirModal(t)">Editar</ion-item-option>
+        <ion-item-option color="danger" (click)="confirmarEliminar(t, slidingItem)">Eliminar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ng-template #empty>
+    <app-empty-state
+      mensaje="No hay transacciones"
+      icono="card-outline"
+      accion="Agregar transaccion"
+      (onAccion)="abrirModal()">
+    </app-empty-state>
+  </ng-template>
+
+  <ion-fab class="transacciones-fab" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="abrirModal()" aria-label="Agregar transaccion">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>

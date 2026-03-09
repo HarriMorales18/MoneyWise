@@ -1,0 +1,12 @@
+<div class="empty-state-card">
+  <div class="empty-state-graphic">
+    <div class="empty-state-circle">
+      <ion-icon [name]="icono"></ion-icon>
+    </div>
+  </div>
+  <div class="empty-state-copy">
+    <h3>{{ mensaje }}</h3>
+    <p class="empty-state-help">No se encontraron movimientos. Agrega tu primera transacción ahora.</p>
+    <ion-button fill="solid" color="primary" *ngIf="accion" (click)="accionClick()">{{ accion }}</ion-button>
+  </div>
+</div>

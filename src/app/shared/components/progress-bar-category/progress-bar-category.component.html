@@ -1,0 +1,11 @@
+<div class="progress-category-card">
+  <div class="progress-category-card__header">
+    <div>
+      <strong>{{ categoria }}</strong>
+      <span>{{ monto | currencyFormat }}</span>
+    </div>
+    <span class="progress-category-card__percent">{{ porcentaje | number:'1.0-0' }}%</span>
+  </div>
+
+  <ion-progress-bar [value]="porcentaje / 100" [color]="color"></ion-progress-bar>
+</div>

@@ -1,0 +1,9 @@
+<ion-segment [(ngModel)]="tipoSeleccionado" (ionChange)="cambiarTipo($any($event.detail.value) || 'todos')">
+  <ion-segment-button value="todos">Todos</ion-segment-button>
+  <ion-segment-button value="ingreso">Ingreso</ion-segment-button>
+  <ion-segment-button value="gasto">Gasto</ion-segment-button>
+</ion-segment>
+
+<app-select-field class="categoria-field" placeholder="Seleccione la categoría" [options]="$any(categorias)" [value]="categoriaSeleccionada" (onChange)="cambiarCategoria($event)"></app-select-field>
+
+<ion-searchbar [value]="textoBusqueda" (ionInput)="buscar($event)" placeholder="Buscar..."></ion-searchbar>

@@ -1,0 +1,40 @@
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+
+/* MoneyWise - Paleta B (Azul calmado)
+	 Primary: #155E75
+	 Primary-variant: #0E4A5A
+	 Accent: #06B6D4
+	 Success: #16A34A
+	 Danger: #EF4444
+	 Background: #F1F5F9
+	 Surface: #FFFFFF
+	 Text: #0B1724
+	 Muted: #64748B
+*/
+
+:root {
+	--ion-color-primary: #155E75;
+	--ion-color-primary-rgb: 21,94,117;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255,255,255;
+	--ion-color-primary-shade: #0E4A5A;
+	--ion-color-primary-tint: #1e6f8f;
+
+	--ion-color-secondary: #06B6D4; /* Accent */
+	--ion-color-secondary-contrast: #ffffff;
+
+	--ion-color-success: #16A34A;
+	--ion-color-danger: #EF4444;
+
+	--color-bg: #F1F5F9;
+	--color-surface: #FFFFFF;
+	--color-text: #0B1724;
+	--color-muted: #64748B;
+}
+
+body {
+	background: var(--color-bg);
+	color: var(--color-text);
+}
+

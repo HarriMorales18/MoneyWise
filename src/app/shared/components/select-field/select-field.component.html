@@ -1,0 +1,9 @@
+<ion-item (click)="$event.stopPropagation()">
+  <ion-label *ngIf="label">{{ label }}</ion-label>
+  <ion-select [value]="value" [placeholder]="placeholder" (ionChange)="valueChange($event)">
+    <ion-select-option *ngFor="let opt of options" [value]="opt.value">
+      {{ opt.label }}
+    </ion-select-option>
+  </ion-select>
+  <ion-note *ngIf="error" color="danger">{{ error }}</ion-note>
+</ion-item>

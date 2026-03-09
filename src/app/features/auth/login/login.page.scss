@@ -1,0 +1,119 @@
+ion-button {
+  margin-top: 12px;
+}
+
+ion-text {
+  margin-top: 8px;
+  display: block;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* intensified background: deeper primary tint + subtle radial accent */
+  background:
+    radial-gradient(circle at 12% 18%, rgba(6,182,212,0.14), transparent 18%),
+    linear-gradient(180deg, rgba(21,94,117,0.30), rgba(6,182,212,0.12));
+}
+
+.login-card {
+  width: 100%;
+  border-radius: 14px;
+  overflow: visible;
+  background: transparent; /* make container visually unobtrusive */
+  box-shadow: none;
+}
+
+.login-card-header {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 8px;
+}
+
+.login-brand {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ion-color-primary, #155E75);
+}
+
+.login-submit {
+  margin-top: 14px;
+}
+
+/* Make individual input items look like floating cards */
+app-input-field ion-item {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(2,6,23,0.08);
+  margin-bottom: 12px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+}
+
+/* Input inner spacing */
+app-input-field ion-input,
+app-input-field ion-textarea {
+  padding: 10px 0;
+}
+
+.login-submit {
+  border-radius: 10px;
+  box-shadow: 0 12px 26px rgba(21,94,117,0.18);
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+}
+
+.login-card ion-card-content {
+  padding: 22px;
+}
+
+.login-card-header {
+  margin-bottom: 6px;
+}
+
+.login-brand {
+  letter-spacing: 0.2px;
+}
+
+.login-footer {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  align-items:center;
+  margin-top:12px;
+}
+
+.error-text p {
+  margin: 8px 0 0 0;
+}
+
+/* Hide visible scrollbars while preserving scrolling behavior */
+.login-page {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.login-page::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+/* Keep focus outlines for accessibility, but avoid visible page outline on scroll */
+.login-page:focus {
+  outline: none;
+}
+
+/* Ensure the internal grid/row take the full viewport so centering is reliable */
+.login-page ion-grid,
+.login-page ion-grid > ion-row {
+  height: 100vh;
+}
+
+/* Constrain card width and center within column */
+.login-card {
+  max-width: 480px;
+  margin: 0 auto;
+}

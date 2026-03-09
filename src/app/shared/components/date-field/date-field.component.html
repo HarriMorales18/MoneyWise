@@ -1,0 +1,5 @@
+<ion-item>
+  <ion-label position="stacked">{{ label }}</ion-label>
+  <ion-datetime [value]="value" (ionChange)="valueChange($event)"></ion-datetime>
+  <ion-note *ngIf="error" color="danger">{{ error }}</ion-note>
+</ion-item>

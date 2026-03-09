@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.progress-category-card {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(248, 250, 252, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.progress-category-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.progress-category-card__header div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.progress-category-card__header strong,
+.progress-category-card__percent {
+  color: #14213d;
+}
+
+.progress-category-card__header span {
+  color: #5f6c80;
+}
+
+.progress-category-card__percent {
+  font-weight: 700;
+}
+
+ion-progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  --progress-background: rgba(37, 99, 235, 0.18);
+}

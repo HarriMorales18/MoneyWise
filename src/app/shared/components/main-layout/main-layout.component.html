@@ -1,0 +1,33 @@
+<ion-page class="layout-shell">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>
+        MoneyWise
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button [disabled]="isLoggingOut" (click)="logout()">
+          <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <section class="layout-content">
+    <ng-content></ng-content>
+  </section>
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-segment scrollable>
+        <ion-segment-button routerLink="/tabs/dashboard" value="dashboard">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Dashboard</ion-label>
+        </ion-segment-button>
+        <ion-segment-button routerLink="/tabs/transacciones" value="transacciones">
+          <ion-icon name="card-outline"></ion-icon>
+          <ion-label>Transacciones</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>
+</ion-page>

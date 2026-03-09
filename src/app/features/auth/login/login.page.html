@@ -1,0 +1,56 @@
+<ion-content class="login-page">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center" style="min-height:100%">
+      <ion-col size-xs="12" size-sm="8" size-md="6" size-lg="4">
+        <ion-card class="login-card">
+          <ion-card-header class="login-card-header">
+            <div class="login-brand">MoneyWise</div>
+            <ion-card-subtitle>Tu control financiero personal</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+              <app-input-field
+                label="Email"
+                name="login-email"
+                autocomplete="username"
+                type="email"
+                placeholder="ejemplo@mail.com"
+                [value]="f['email'].value"
+                [error]="getEmailError()"
+                (onChange)="f['email'].setValue($event)"
+                (onBlur)="f['email'].markAsTouched()">
+              </app-input-field>
+
+              <app-input-field
+                label="Contraseña"
+                name="login-password"
+                autocomplete="current-password"
+                type="password"
+                placeholder="********"
+                [value]="f['password'].value"
+                [error]="getPasswordError()"
+                (onChange)="f['password'].setValue($event)"
+                (onBlur)="f['password'].markAsTouched()">
+              </app-input-field>
+
+              <ion-button expand="block" color="primary" type="submit" class="login-submit">Ingresar</ion-button>
+
+            </form>
+
+            <ion-text color="danger" *ngIf="errorMessage" class="error-text">
+              <p>{{ errorMessage }}</p>
+            </ion-text>
+
+            <div class="login-footer">
+              <span>¿No tienes cuenta?</span>
+              <ion-button fill="clear" size="small" routerLink="/auth/register">Registrarse</ion-button>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

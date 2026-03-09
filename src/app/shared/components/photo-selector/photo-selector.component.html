@@ -1,0 +1,10 @@
+<div class="photo-controls">
+  <ion-button class="photo-btn left" size="small" shape="round" fill="solid" (click)="tomarFoto()">Tomar foto</ion-button>
+  <ion-button class="photo-btn right" size="small" shape="round" fill="solid" (click)="seleccionarDeGaleria()">Seleccionar</ion-button>
+</div>
+
+<ion-row *ngIf="fotoActual">
+  <ion-col>
+    <ion-img [src]="fotoActual"></ion-img>
+  </ion-col>
+</ion-row>

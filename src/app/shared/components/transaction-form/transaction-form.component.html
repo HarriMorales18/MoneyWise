@@ -1,0 +1,60 @@
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <ion-card class="transaction-card">
+    <ion-card-content>
+      <ion-segment class="tipo-segment" [value]="f['tipo'].value" (ionChange)="f['tipo'].setValue($any($event.detail.value))">
+        <ion-segment-button value="ingreso">Ingreso</ion-segment-button>
+        <ion-segment-button value="gasto">Gasto</ion-segment-button>
+      </ion-segment>
+
+      <app-select-field
+        label="Categoría"
+        [options]="$any(categorias)"
+        [value]="f['categoria'].value"
+        (onChange)="f['categoria'].setValue($event)">
+      </app-select-field>
+
+      <app-date-field
+        label="Fecha"
+        [value]="$any(f['fecha'].value)"
+        (onChange)="f['fecha'].setValue($any($event))">
+      </app-date-field>
+
+      <app-input-field
+        label="Monto"
+        type="number"
+        [value]="f['monto'].value"
+        (onChange)="f['monto'].setValue($event)">
+      </app-input-field>
+
+      <div class="descripcion-item">
+        <label class="descripcion-label">Descripción</label>
+        <ion-textarea
+          class="descripcion-textarea"
+          placeholder="Ej: Compra en supermercado, taxi o suscripción"
+          [value]="f['descripcion'].value"
+          autoGrow="true"
+          (ionInput)="f['descripcion'].setValue($any($event.detail.value) ?? '')">
+        </ion-textarea>
+      </div>
+
+      <app-photo-selector
+        [fotoActual]="f['comprobante'].value || ''"
+        (onFotoSeleccionada)="fotoSeleccionada($event)"
+        (onFotoEliminada)="fotoEliminada()">
+      </app-photo-selector>
+    </ion-card-content>
+
+    <ion-card-footer class="action-row">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="block" color="primary" type="submit" [disabled]="form.invalid">Guardar</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" color="medium" type="button" (click)="cancelar()">Cancelar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-footer>
+  </ion-card>
+</form>

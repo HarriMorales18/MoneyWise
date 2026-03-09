@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fotos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <swiper-container [attr.initial-slide]="fotoInicial" [attr.speed]="400">
+    <swiper-slide *ngFor="let foto of fotos">
+      <ion-img [src]="foto" style="width: 100%; height: 100%; object-fit: contain;"></ion-img>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

@@ -1,0 +1,185 @@
+<ion-grid class="dashboard-page ion-padding">
+  <ion-row class="dashboard-hero">
+    <ion-col size="12" size-lg="8" class="dashboard-hero-copy">
+      <ion-note class="dashboard-eyebrow">Vision financiera</ion-note>
+      <ion-text>
+        <h1>Dashboard</h1>
+      </ion-text>
+      <ion-note class="dashboard-subtitle">
+        Controla tu flujo mensual y detecta rapidamente en que categorias se concentra el gasto.
+      </ion-note>
+    </ion-col>
+
+    <ion-col size="12" size-lg="4" class="dashboard-period-card">
+      <ion-note class="dashboard-period-label">Periodo visible</ion-note>
+      <ion-text class="dashboard-period-value">{{ currentMonthLabel }}</ion-text>
+      <ion-note>{{ spendingStatusLabel }}</ion-note>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid class="dashboard-cards-grid">
+    <ion-row>
+      <ion-col size="12" size-lg="4">
+        <app-dashboard-card
+          titulo="Saldo actual"
+          [monto]="resumen.saldoActual"
+          tipo="saldo"
+          icono="wallet-outline">
+        </app-dashboard-card>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4">
+        <app-dashboard-card
+          titulo="Ingresos del mes"
+          [monto]="resumen.totalIngresos"
+          tipo="ingreso"
+          icono="arrow-up-outline">
+        </app-dashboard-card>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4">
+        <app-dashboard-card
+          titulo="Gastos del mes"
+          [monto]="resumen.totalGastos"
+          tipo="gasto"
+          icono="arrow-down-outline">
+        </app-dashboard-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row class="dashboard-analytics-grid">
+    <ion-col size="12" size-lg="8">
+      <ion-card class="dashboard-chart-card">
+        <ion-card-header class="section-header">
+          <ion-text>
+            <ion-note class="section-kicker">Distribucion</ion-note>
+            <h2>Gastos por categoria</h2>
+          </ion-text>
+          <ion-note class="section-caption">Basado en tus gastos registrados</ion-note>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="chart-layout" *ngIf="chartSegments.length; else noChartData">
+            <div class="donut-chart-shell">
+              <svg viewBox="0 0 200 200" class="donut-chart" aria-hidden="true">
+                <circle class="donut-track" cx="100" cy="100" r="72"></circle>
+                <circle
+                  *ngFor="let segment of chartSegments; trackBy: trackByCategory"
+                  class="donut-segment"
+                  cx="100"
+                  cy="100"
+                  r="72"
+                  [attr.stroke]="segment.color"
+                  [attr.stroke-dasharray]="segment.dashArray"
+                  [attr.stroke-dashoffset]="segment.dashOffset">
+                </circle>
+              </svg>
+
+              <div class="donut-chart-center">
+                <ion-note>Total gastado</ion-note>
+                <ion-text class="donut-chart-value">{{ resumen.totalGastos | currencyFormat }}</ion-text>
+                <ion-note>{{ chartSegments.length }} categorias</ion-note>
+              </div>
+            </div>
+
+            <ion-list class="chart-legend">
+              <ion-item
+                *ngFor="let segment of chartSegments; trackBy: trackByCategory"
+                class="legend-item"
+                lines="none"
+                detail="false">
+                <span class="legend-dot" [style.background]="segment.color"></span>
+                <ion-label class="legend-copy">
+                  <ion-text class="legend-copy-title">{{ segment.categoria }}</ion-text>
+                  <ion-note>{{ segment.monto | currencyFormat }}</ion-note>
+                </ion-label>
+                <ion-note class="legend-value">{{ segment.porcentaje | number:'1.0-0' }}%</ion-note>
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="12" size-lg="4">
+      <ion-card class="dashboard-insights-card">
+        <ion-card-header class="section-header">
+          <ion-text>
+            <ion-note class="section-kicker">Resumen</ion-note>
+            <h2>Estado del mes</h2>
+          </ion-text>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item class="insight-balance" lines="none" detail="false">
+            <ion-label>
+              <ion-note>Balance del mes</ion-note>
+              <ion-text class="insight-value">{{ remainingBalance | currencyFormat }}</ion-text>
+              <ion-note>Ingresos menos gastos del periodo actual</ion-note>
+            </ion-label>
+          </ion-item>
+
+          <ion-item class="spending-meter" lines="none" detail="false">
+            <ion-label>
+              <div class="spending-meter-copy">
+                <ion-note>Ritmo de gasto</ion-note>
+                <ion-text class="spending-meter-value">{{ spendingProgress | number:'1.0-0' }}%</ion-text>
+              </div>
+              <ion-progress-bar [value]="spendingProgress / 100" color="warning"></ion-progress-bar>
+              <ion-note>{{ spendingStatusLabel }}</ion-note>
+            </ion-label>
+          </ion-item>
+
+          <ion-item class="top-category" lines="none" detail="false" *ngIf="topCategory as leadingCategory">
+            <ion-label>
+              <ion-note>Categoria con mayor peso</ion-note>
+              <ion-text class="insight-value">{{ leadingCategory.categoria }}</ion-text>
+              <ion-note>
+                {{ leadingCategory.monto | currencyFormat }} · {{ leadingCategory.porcentaje | number:'1.0-0' }}% del gasto total
+              </ion-note>
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-card class="dashboard-breakdown-section">
+    <ion-card-header class="section-header">
+      <ion-text>
+        <ion-note class="section-kicker">Detalle</ion-note>
+        <h2>Comparativo por categoria</h2>
+      </ion-text>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="category-progress-list" *ngIf="resumen.gastosPorCategoria.length; else noBreakdownData">
+        <app-progress-bar-category
+          *ngFor="let cat of chartSegments; trackBy: trackByCategory"
+          [categoria]="cat.categoria"
+          [monto]="cat.monto"
+          [porcentaje]="cat.porcentaje"
+          [color]="'primary'">
+        </app-progress-bar-category>
+      </div>
+
+      <ng-template #noBreakdownData>
+        <ion-item class="empty-chart-state empty-chart-state--compact" lines="none" detail="false">
+          <ion-icon name="analytics-outline"></ion-icon>
+          <ion-label>
+            <ion-text>No hay categorias para comparar</ion-text>
+          </ion-label>
+        </ion-item>
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-template #noChartData>
+    <ion-item class="empty-chart-state" lines="none" detail="false">
+      <ion-icon name="pie-chart-outline"></ion-icon>
+      <ion-label>
+        <ion-text class="empty-chart-title">Aun no hay gastos por categoria</ion-text>
+        <ion-note>Cuando registres gastos, aqui aparecera una distribucion visual.</ion-note>
+      </ion-label>
+    </ion-item>
+  </ng-template>
+</ion-grid>

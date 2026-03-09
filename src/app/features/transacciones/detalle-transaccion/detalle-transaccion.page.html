@@ -1,0 +1,16 @@
+<ion-content class="detalle-transaccion-page">
+  <div class="ion-padding">
+    <h2>Detalle Transacción</h2>
+
+    <ion-button fill="outline" size="small" (click)="volverATransacciones()">
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      Volver a transacciones
+    </ion-button>
+
+    <app-transaction-detail
+      [transaccion]="transaccion"
+      (onEdit)="editar()"
+      (onDelete)="eliminar()">
+    </app-transaction-detail>
+  </div>
+</ion-content>

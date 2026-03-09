@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="registerForm" (ngSubmit)="registrar()" autocomplete="off">
+
+      <app-input-field
+        label="Nombre"
+        name="register-name"
+        autocomplete="name"
+        placeholder="Tu nombre"
+        [value]="registerForm.get('nombre')?.value"
+        (onChange)="registerForm.get('nombre')?.setValue($event)"
+        (onBlur)="registerForm.get('nombre')?.markAsTouched()"
+        [error]="getNombreError()">
+      </app-input-field>
+
+      <app-input-field
+        label="Email"
+        name="register-email"
+        autocomplete="email"
+        placeholder="ejemplo@mail.com"
+        type="email"
+        [value]="registerForm.get('email')?.value"
+        (onChange)="registerForm.get('email')?.setValue($event)"
+        (onBlur)="registerForm.get('email')?.markAsTouched()"
+        [error]="getEmailError()">
+      </app-input-field>
+
+      <app-input-field
+        label="Contraseña"
+        name="register-password"
+        autocomplete="new-password"
+        placeholder="******"
+        type="password"
+        [value]="registerForm.get('password')?.value"
+        (onChange)="registerForm.get('password')?.setValue($event)"
+        (onBlur)="registerForm.get('password')?.markAsTouched()"
+        [error]="getPasswordError()">
+      </app-input-field>
+
+      <app-input-field
+        label="Confirmar contraseña"
+        name="register-password-confirm"
+        autocomplete="new-password"
+        placeholder="******"
+        type="password"
+        [value]="registerForm.get('confirmarPassword')?.value"
+        (onChange)="registerForm.get('confirmarPassword')?.setValue($event)"
+        (onBlur)="registerForm.get('confirmarPassword')?.markAsTouched()"
+        [error]="getConfirmarPasswordError()">
+      </app-input-field>
+
+      <ion-button expand="block" type="submit" [disabled]="registerForm.invalid">
+        Registrarse
+      </ion-button>
+
+  </form>
+
+  <ion-text class="ion-padding-top">
+      ¿Ya tienes cuenta? 
+      <ion-button fill="clear" routerLink="/auth/login">Iniciar sesión</ion-button>
+   </ion-text>
+</ion-content>

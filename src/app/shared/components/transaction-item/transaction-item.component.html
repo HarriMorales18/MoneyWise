@@ -1,0 +1,22 @@
+<ion-item class="transaction-row" (click)="handleClick()">
+  <div class="ti-left" slot="start">
+    <div class="ti-icon" [ngClass]="transaccion.tipo === 'ingreso' ? 'ti-income' : 'ti-expense'">
+      <ion-icon [name]="transaccion.tipo === 'ingreso' ? 'arrow-up-outline' : 'arrow-down-outline'"></ion-icon>
+    </div>
+  </div>
+
+  <div class="ti-body">
+    <div class="ti-main">
+      <div class="ti-title">{{ transaccion.categoria }}</div>
+      <div class="ti-amount" [ngClass]="transaccion.tipo === 'ingreso' ? 'amount-income' : 'amount-expense'">{{ transaccion.monto | currencyFormat }}</div>
+    </div>
+    <div class="ti-sub">
+      <div class="ti-desc">{{ transaccion.descripcion }}</div>
+      <div class="ti-date">{{ transaccion.fecha | dateFormat }}</div>
+    </div>
+  </div>
+
+  <div class="ti-thumb" slot="end" *ngIf="transaccion.comprobante" (click)="handlePhotoClick($event)">
+    <ion-img [src]="transaccion.comprobante"></ion-img>
+  </div>
+</ion-item>

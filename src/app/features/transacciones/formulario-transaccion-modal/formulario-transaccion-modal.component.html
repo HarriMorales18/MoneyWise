@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar class="modal-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="cancelar()" aria-label="Cerrar">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="modal-title">{{ transaccion ? 'Editar Transacción' : 'Nueva Transacción' }}</ion-title>
+
+    <ion-buttons slot="end">
+      <!-- empty end slot to keep title centered -->
+      <div style="width:40px"></div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-transaction-form
+    [transaccion]="transaccion"
+    (onSave)="guardar($event)"
+    (onCancel)="cancelar()">
+  </app-transaction-form>
+</ion-content>
